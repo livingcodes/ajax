@@ -2,6 +2,7 @@
 using System.Web.Script.Serialization;
 using System.Web.Services;
 using System.Web.UI;
+using System.Collections.Generic;
 
 namespace ajax
 {
@@ -11,8 +12,8 @@ public partial class user_page : Page
       var a = "";
    }
    [WebMethod] public static void void_param(string user) {
-      var usr = new JavaScriptSerializer().Deserialize<user>(user);
-      var name = usr.name;
+      var usrs = new JavaScriptSerializer().Deserialize<List<user>>(user);
+      var name = usrs.Count > 0;
    }
 
    public class user

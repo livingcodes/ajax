@@ -20,6 +20,12 @@
    })
    
    $('#void-param').click(function () {
+      var users = []
+      var user1 = { name: 'you' }
+      var user2 = { name: 'me' }
+      users.push(user1)
+      users.push(user2)
+
       $.ajax({
          url: '/user.aspx/void_param',
          type: 'POST',
@@ -28,10 +34,13 @@
          /* data: "{'user':'me'}", */ // json name must match parameter name
          /* data: "{'user':'{name:\"casey\"}'}", */ // still has escapes in it
          /* data: JSON.stringify({user:'you'}), */
-         data: JSON.stringify({ user: JSON.stringify({ name: 'you' }) }),
+         /* data: JSON.stringify({ user: JSON.stringify({ name: 'you' }) }), */
+         data: JSON.stringify({ user: JSON.stringify(users) }), // pass an array of json
          /* data: JSON.stringify({ user: { name: 'you' } }), */ //internal server error
          /* data: JSON.stringify({"user":{"name":"you"}}), */ // internal server error
          /* data: JSON.stringify({"user":{name:"you"}}), */ // internal server error
+         /*data: JSON.stringify({ user: JSON.stringify(users) }),*/ // won't deserialize. don't need param name in front of every json object, only needed in front of array
+
          success: function (msg) { alert('succeeded') },
          error: function (a, b, c) { alert(c) }
       })
