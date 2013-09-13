@@ -9,7 +9,7 @@ namespace ajax
 public partial class user_page : Page
 {
    [WebMethod] public static void void_noparam() {
-      var a = "";
+      var a = "a";
    }
    [WebMethod] public static void void_param(string user) {
       var usrs = new JavaScriptSerializer().Deserialize<List<user>>(user);

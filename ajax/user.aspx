@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
 <body>
+   <p><mark>contentType</mark> required for VS debugger to work</p>
+   <p><mark>contentType</mark> required to prevent "success:" function's "data" parameter from having all html which is increases request size too much</p>
    <a href="javascript:void(0)" id="void-noparam">void, no param</a>
    <br>
    <a href="javascript:void(0)" id="void-param">void, param</a>
@@ -15,7 +17,8 @@
       $.ajax({
          url:'/user.aspx/void_noparam',
          type:'POST',
-         success:function(msg) { alert('succeeded') },
+         success: function (data, status, request) { console.log(data); console.log(status); },
+         contentType: 'application/json; charset=utf-8', 
          error:function(a,b,c) { alert(c) }
       })
    })
@@ -42,7 +45,7 @@
          /* data: JSON.stringify({"user":{name:"you"}}), */ // internal server error
          /* data: JSON.stringify({ user: JSON.stringify(users) }),*/ // won't deserialize. don't need param name in front of every json object, only needed in front of array
 
-         success: function (msg) { alert('succeeded') },
+         success: function (data, status) { console.log(data); console.log(status); },
          error: function (a, b, c) { alert(c) }
       })
    })
