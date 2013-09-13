@@ -11,9 +11,13 @@ public partial class user_page : Page
    [WebMethod] public static void void_noparam() {
       var a = "a";
    }
-   [WebMethod] public static void void_param(string user) {
-      var usrs = new JavaScriptSerializer().Deserialize<List<user>>(user);
+   [WebMethod] public static void void_param_as_list_of_users(string users) {
+      var usrs = new JavaScriptSerializer().Deserialize<List<user>>(users);
       var name = usrs.Count > 0;
+   }
+   [WebMethod] public static void void_param_as_user(string user) {
+      var usr = new JavaScriptSerializer().Deserialize<user>(user);
+      var name = usr.name;
    }
 
    public class user
