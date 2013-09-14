@@ -11,6 +11,8 @@
    <a href="javascript:void(0)" id="void-param">void, param</a>
    <br>
    <a href="javascript:void(0)" id="void-param-list">void, param list</a>
+   <br>
+   <a href="javascript:void(0)" id="void-error">void, error</a>
 
    <script src="jquery-1.8.2.js"></script>
    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
@@ -42,9 +44,12 @@
          type: 'POST',
          contentType: 'application/json; charset=utf-8',
          dataType: 'json',
-         //data: JSON.stringify({ user: JSON.stringify(user) }), // works
+         // data: JSON.stringify({ user: JSON.stringify(user) }), // works
          data: JSON.stringify({ user: '{name:"you"}' }), // works
-         //data: JSON.stringify(user2), // fails
+         // data: JSON.stringify(user2), // fails
+         // data: JSON.stringify({ user: { name: 'you' } }), //internal server error
+         // data: JSON.stringify({"user":{"name":"you"}}), // internal server error
+         // data: JSON.stringify({"user":{name:"you"}}), // internal server error
          success: function(data, status) { console.log(status); },
          error: function(a, b, c) { console.log(a); console.log(b); console.log(c); }
       })
@@ -66,13 +71,21 @@
          /* data: "{'user':'{name:\"casey\"}'}", */ // still has escapes in it
          /* data: JSON.stringify({user:'you'}), */
          /* data: JSON.stringify({ user: JSON.stringify({ name: 'you' }) }), */
-         data: JSON.stringify({ users: JSON.stringify(users) }), // pass an array of json
-         /* data: JSON.stringify({ user: { name: 'you' } }), */ //internal server error
-         /* data: JSON.stringify({"user":{"name":"you"}}), */ // internal server error
-         /* data: JSON.stringify({"user":{name:"you"}}), */ // internal server error
+         data: JSON.stringify({ users: JSON.stringify(users) }), // works, pass an array of json
+         
          /* data: JSON.stringify({ user: JSON.stringify(users) }),*/ // won't deserialize. don't need param name in front of every json object, only needed in front of array
          success: function (data, status) { console.log(data); console.log(status); },
          error: function (a, b, c) { alert(c) }
+      })
+   })
+
+   $('#void-error').click(function() {
+      $.ajax({
+         url: '/user.aspx/void_error',
+         type: 'POST',
+         contentType: 'application/json; charset=utf-8',
+         success: function (data, status, request) { console.log(data); },
+         error: function (request, status, message) { console.log(request); console.log(status); console.log(message); }
       })
    })
 

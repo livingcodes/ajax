@@ -19,6 +19,9 @@ public partial class user_page : Page
       var usr = new JavaScriptSerializer().Deserialize<user>(user);
       var name = usr.name;
    }
+   [WebMethod] public static void void_error() {
+      throw new Exception("uh oh");
+   }
 
    public class user
    {
