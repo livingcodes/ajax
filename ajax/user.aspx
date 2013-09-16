@@ -13,6 +13,8 @@
    <a href="javascript:void(0)" id="void-param-list">void, param list</a>
    <br>
    <a href="javascript:void(0)" id="void-error">void, error</a>
+   <br>
+   <a href="javascript:void(0)" id="string-noparam">string, no param</a>
 
    <script src="jquery-1.8.2.js"></script>
    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
@@ -88,6 +90,21 @@
          error: function (request, status, message) { console.log(request); console.log(status); console.log(message); }
       })
    })
+
+   $('#string-noparam').click(function() {
+      $.ajax({
+         url: '/user.aspx/json_noparam',
+         type: 'POST',
+         contentType: 'application/json; charset=utf-8',
+         success: function (data, status, request) {
+            result = JSON.parse(data.d);
+            console.log(data.d); console.log(status);
+         },
+         error: function (request, status, message) { console.log(request); console.log(status); }
+      })
+   })
+
+   var result = 'not set'
 
    </script>
 </body>

@@ -23,6 +23,11 @@ public partial class user_page : Page
       throw new Exception("uh oh");
    }
 
+   // JSON.parse requires double quotes
+   [WebMethod] public static string json_noparam() {
+      return "{\"name\":\"you\"}";
+   }
+
    public class user
    {
       public string name { get; set; }
