@@ -15,6 +15,8 @@
    <a href="javascript:void(0)" id="void-error">void, error</a>
    <br>
    <a href="javascript:void(0)" id="string-noparam">string, no param</a>
+   <br>
+   <a href="javascript:void(0)" id="string-param">string, param</a>
 
    <script src="jquery-1.8.2.js"></script>
    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
@@ -101,6 +103,20 @@
             console.log(data.d); console.log(status);
          },
          error: function (request, status, message) { console.log(request); console.log(status); }
+      })
+   })
+
+   $('#string-param').click(function() {
+      $.ajax({
+         url: '/user.aspx/json_param',
+         type: 'POST',
+         contentType: 'application/json; charset=utf-8',
+         dataType: 'json',
+         data: JSON.stringify({ user: '{name:"you"}' }),
+         success: function (data, status, request) {
+            result = JSON.parse(data.d);
+            console.log(data.d); console.log(status);
+         }
       })
    })
 

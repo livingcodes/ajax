@@ -28,6 +28,11 @@ public partial class user_page : Page
       return "{\"name\":\"you\"}";
    }
 
+   [WebMethod] public static string json_param(string user) {
+      var usr = new JavaScriptSerializer().Deserialize<user>(user);
+      return "{\"name\":\"" + usr.name + "\"}";
+   }
+
    public class user
    {
       public string name { get; set; }
