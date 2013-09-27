@@ -17,6 +17,7 @@
    <a href="javascript:void(0)" id="string-noparam">string, no param</a>
    <br>
    <a href="javascript:void(0)" id="string-param">string, param</a>
+   <input id="param" type="text" placeholder="param" />
 
    <script src="jquery-1.8.2.js"></script>
    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
@@ -112,7 +113,7 @@
          type: 'POST',
          contentType: 'application/json; charset=utf-8',
          dataType: 'json',
-         data: JSON.stringify({ user: '{name:"you"}' }),
+         data: JSON.stringify({ user: '{name:"' + $('#param').val() + '"}' }),
          success: function (data, status, request) {
             result = JSON.parse(data.d);
             console.log(data.d); console.log(status);
