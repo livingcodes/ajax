@@ -116,7 +116,7 @@
          data: JSON.stringify({ user: '{name:"' + $('#param').val() + '"}' }),
          success: function (data, status, request) {
             result = JSON.parse(data.d);
-            console.log(data.d); console.log(status);
+            console.log(data.d); console.log('result:'+result.name); console.log(status);
          }
       })
    })
