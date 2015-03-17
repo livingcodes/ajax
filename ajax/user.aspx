@@ -120,6 +120,26 @@
          }
       })
    })
+   
+   // void return, one string param
+   function check_url_segment(segment) {
+     $.ajax({
+         url:'/admin/edit-api.aspx/check_url_segment',
+         type:'POST',
+         contentType:'application/json; charset=utf-8',
+         dataType:'json',
+         data: '{segment:"'+segment+'"}',
+         success: function(data, status, request) {
+             console.log('AJAX succeeded')
+             alert('succeeded')
+         },
+         error: function(a,b,c) {
+             console.log('AJAX failed')
+             console.log(a)
+             console.log(b)
+         }
+     })
+    }
 
    var result = 'not set'
 
